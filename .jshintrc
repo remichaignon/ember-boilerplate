@@ -1,0 +1,33 @@
+{
+	"bitwise": true,
+	"curly": true,
+	"eqeqeq": true,
+	"forin": true,
+	"immed": true,
+	"indent": 4,
+	"latedef": true,
+	"newcap": true,
+	"noarg": true,
+	"quotmark": "double",
+	"undef": true,
+	"unused": true,
+	"trailing": true,
+	"eqnull": true,
+	"browser": true,
+	"white": false,
+	"globals": {
+		"$": true,
+		"test": true,
+		"equal": true,
+		"ok": true,
+		"should": true,
+		"require": true,
+		"console": true,
+		"store": true,
+		"moment": true,
+		"DS": true,
+		"Ember": true,
+		"Handlebars": true,
+		"MY_APP": true
+	}
+}

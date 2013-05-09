@@ -1,0 +1,11 @@
+{
+	"application": {
+		"hello": "Hello!"
+	},
+
+	"splash": {},
+
+	"404": {
+		"not_found": "404 NOT FOUND"
+	}
+}

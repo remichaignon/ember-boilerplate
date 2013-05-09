@@ -1,0 +1,26 @@
+{
+  "name": "MY_APP",
+  "description": "MY_APP is Awesome!",
+  "version": "0.0.1",
+  "devDependencies": {
+    "handlebars": "*",
+    "jquery": "*",
+    "jsdom": "*",
+    "less": "*",
+    "mocha": "*",
+    "should": "*",
+    "zombie": "*",
+    "istanbul": "*",
+    "karma": "*",
+    "grunt": "*",
+    "grunt-neuter": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-qunit": "*",
+    "grunt-ember-templates": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-htmlmin": "*",
+    "grunt-hashres": "*"
+  }
+}
