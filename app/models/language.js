@@ -16,10 +16,6 @@ MY_APP.Language.reopenClass({
 			{}
 		).then(
 			function (json) {
-				if (null == json) {
-					throw new Error("Error GETting Language from: " + "/app/languages/en/lang.json");
-				}
-
 				language.set("generic", json);
 
 				return language;

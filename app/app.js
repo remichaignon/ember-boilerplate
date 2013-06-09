@@ -29,6 +29,8 @@ require("app/instruments/render_performance");
 
 require("app/models/model");
 require("app/models/config");
+require("app/models/language");
+require("app/models/error");
 
 
 require("app/helpers/json");

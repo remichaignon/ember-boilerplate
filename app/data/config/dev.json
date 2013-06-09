@@ -3,5 +3,6 @@
 	"API_TOKEN": "",
 
 	"LOG_TRANSITIONS": true,
-	"LOG_INSTRUMENTS": true
+	"LOG_INSTRUMENTS": true,
+	"LOG_ALL_ERRORS": true
 }

@@ -1,16 +1,41 @@
 MY_APP.Route = Ember.Route.extend({
 	redirect: function () {
-		this.controllerFor("application").set("targetRoute", this.routeName);
-		this.controllerFor("application").set("targetModel", this.currentModel);
+		var applicationController = this.controllerFor("application");
 
-		if (!this.controllerFor("application").get("isSetup")) {
+		applicationController.set("targetRoute", this.routeName);
+		applicationController.set("targetModel", this.currentModel);
+
+		if (!applicationController.get("isSetup")) {
 			this.transitionTo("doSetup");
-			return;
 		}
+	},
+	redirectToTargetRoute: function () {
+		var applicationController = this.controllerFor("application");
 
-		this.controllerFor("application").set("targetRoute", null);
-		this.controllerFor("application").set("targetModel", null);
+		var targetRoute = applicationController.get("targetRoute") || "index";
+		var targetModel = applicationController.get("targetModel");
 
-		this.transitionTo("index");
-	}
+		applicationController.set("targetRoute", null);
+		applicationController.set("targetModel", null);
+
+		if (targetModel) {
+			this.transitionTo(targetRoute, targetModel);
+		}
+		else {
+			this.transitionTo(targetRoute);
+		}
+	},
+
+	errorHandlerBuilder: function (customErrorHandler) {
+		return function (errorObject) {
+			var error = MY_APP.Error.create(errorObject);
+
+			customErrorHandler(error);
+		};
+	},
+	genericErrorHandler: function (errorObject) {
+		var error = MY_APP.Error.create(errorObject);
+
+		throw new Error("Could not handle error. (code: " + error.get("code") + ", message: " + error.get("message"));
+	},
 });

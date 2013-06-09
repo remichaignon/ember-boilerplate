@@ -49,7 +49,7 @@ module.exports = function (grunt) {
 			The compiled result will be stored in
 			Ember.TEMPLATES keyed on their file path (with the "app/templates" stripped)
 		*/
-		ember_templates: {
+		emberTemplates: {
 			options: {
 				templateName: function (sourceFile) {
 					return sourceFile.replace(/app\/templates\//, "");
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
 			},
 			scripts: {
 				files: [
-					"dependencies/ember*.js",
+					"dependencies/*.js",
 					"app/*.js",
 					"app/**/*.js",
 					"app/**/**/*.js"

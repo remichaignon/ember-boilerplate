@@ -13,16 +13,9 @@ MY_APP.Config.reopenClass({
 			{}
 		).then(
 			function (json) {
-				if (null == json) {
-					throw new Error("Error GETing the Config file from: " + "/app/data/config/" + config + ".json");
-				}
-
-				if (json.LOG_TRANSITIONS) {
-					MY_APP.LOG_TRANSITIONS = true;
-				}
-				if (json.LOG_INSTRUMENTS) {
-					MY_APP.LOG_INSTRUMENTS = true;
-				}
+				MY_APP.LOG_TRANSITIONS = (null == json.LOG_TRANSITIONS) ? false : json.LOG_TRANSITIONS;
+				MY_APP.LOG_INSTRUMENTS = (null == json.LOG_INSTRUMENTS) ? false : json.LOG_INSTRUMENTS;
+				MY_APP.LOG_ALL_ERRORS = (null == json.LOG_ALL_ERRORS) ? false : json.LOG_ALL_ERRORS;
 
 				return MY_APP.Config.create({
 					api_url: json.API_URL,
