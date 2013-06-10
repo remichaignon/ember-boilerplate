@@ -1,4 +1,6 @@
 MY_APP.FourOhFourRoute = MY_APP.Route.extend({
+	redirect: function () {},
+
 	model: function (params) {
 		return params.unknown_path;
 	},

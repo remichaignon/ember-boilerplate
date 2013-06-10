@@ -2,8 +2,6 @@ MY_APP.Model = Ember.Object.extend({});
 
 MY_APP.Model.reopenClass({
 	ajaxAPI: function (type, url, args) {
-		var that = this;
-
 		return new Ember.RSVP.Promise(
 			function(resolve, reject) {
 				args.type = type;
@@ -37,8 +35,6 @@ MY_APP.Model.reopenClass({
 	},
 
 	ajaxSite: function (type, url, args) {
-		var that = this;
-
 		return new Ember.RSVP.Promise(
 			function(resolve, reject) {
 				args.type = type;

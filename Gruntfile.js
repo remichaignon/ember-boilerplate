@@ -110,7 +110,7 @@ module.exports = function (grunt) {
 			},
 			templates: {
 				files: ["app/**/*.hbs"],
-				tasks: ["ember_templates"]
+				tasks: ["emberTemplates"]
 			}
 		},
 
@@ -236,19 +236,19 @@ module.exports = function (grunt) {
 		Application Default task. Compiles templates, neuters application code, and begins
 		watching for changes.
 	*/
-	grunt.registerTask("default", ["ember_templates", "neuter:dev", "less:dev", "htmlmin:dev", "watch"]);
+	grunt.registerTask("default", ["emberTemplates", "neuter:dev", "less:dev", "htmlmin:dev", "watch"]);
 
 	/*
 		Application Development task. Compiles templates, neuters application code, lint
 		the result, compile LESS into regular CSS, copy HTML.
 	*/
-	grunt.registerTask("dev", ["ember_templates", "neuter:dev", "jshint", "less:dev", "htmlmin:dev"]);
+	grunt.registerTask("dev", ["emberTemplates", "neuter:dev", "jshint", "less:dev", "htmlmin:dev"]);
 
 	/*
 		Application Distribution task. Compiles templates, neuters application code, lint
 		the result, compile LESS into minified CSS, minify HTML, obfuscate code, and add a hash to bust the cache.
 	*/
-	grunt.registerTask("dist", ["ember_templates", "neuter:dist", "jshint", "less:dist", "htmlmin:dist", "uglify:dist", "hashres:dist"]);
+	grunt.registerTask("dist", ["emberTemplates", "neuter:dist", "jshint", "less:dist", "htmlmin:dist", "uglify:dist", "hashres:dist"]);
 
 	/*
 		A task to run the application's unit tests via the command line.
@@ -259,5 +259,5 @@ module.exports = function (grunt) {
 			- build an html file with a script tag for each test file
 			- headlessy load this page and print the test runner results
 	*/
-	grunt.registerTask("test", ["ember_templates", "neuter:dev", "jshint", "less:dev", "htmlmin:dev", "build_test_runner_file", "qunit"]);
+	grunt.registerTask("test", ["emberTemplates", "neuter:dev", "jshint", "less:dev", "htmlmin:dev", "build_test_runner_file", "qunit"]);
 };
