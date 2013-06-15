@@ -1,3 +1,20 @@
+/* global basePath:true */
+/* global files:true */
+/* global exclude:true */
+/* global reporters:true */
+/* global port:true */
+/* global runnerPort:true */
+/* global colors:true */
+/* global logLevel:true */
+/* global autoWatch:true */
+/* global browsers:true */
+/* global captureTimeout:true */
+/* global singleRun:true */
+/* global MOCHA:true */
+/* global MOCHA_ADAPTER:true */
+/* global LOG_DEBUG:true */
+/* jshint camelcase:false */
+
 // Karma configuration
 // Generated on Wed Apr 10 2013 14:28:11 GMT-0600 (MDT)
 
@@ -8,26 +25,26 @@ basePath = "";
 
 // list of files / patterns to load in the browser
 files = [
-  MOCHA,
-  MOCHA_ADAPTER,
-  "MY_APP.css",
-  "MY_APP.js",
-  "index.html",
-  "tests/app/*.js"
+	MOCHA,
+	MOCHA_ADAPTER,
+	"MY_APP.css",
+	"MY_APP.js",
+	"index.html",
+	"tests/app/*.js"
 ];
 
 
 // list of files to exclude
 exclude = [
-	'test/*.js',
-	'test/**/*.js',
-	'node_modules/*',
-	'sites/**/*.js'
+	"test/*.js",
+	"test/**/*.js",
+	"node_modules/*",
+	"sites/**/*.js"
 ];
 
 
 // test results reporter to use
-// possible values: 'dots', 'progress', 'junit'
+// possible values: "dots", "progress", "junit"
 reporters = ["progress"];
 
 

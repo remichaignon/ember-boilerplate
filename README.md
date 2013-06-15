@@ -15,7 +15,7 @@ This is where the actual code of your browser application lives. Start reading a
 The external libraries required to run the application: Ember, Handlebars, jQuery, Boostrap, ...
 
 ### test/
-Coming soon...
+Unit tests and support files to run the tests.
 
 ### .jshintrc
 This project uses [JSHint](http://www.jshint.com/) for [linting](http://en.wikipedia.org/wiki/Lint_(software\)) to enforce some coding standards and avoid common programming mistakes (like missing `var` statements causing variables to leak into the global scope). These settings are stored as a dot file so that while developing you can connect the project standards into your editor of choice and when building for deployment this file can be used by the build process and deployment can be stopped if it fails the linting process.
@@ -79,6 +79,12 @@ for any changes. See `Gruntfile.js` for a deeper dive into what happens here.
 ##### Other targets
 
 ```shell
+grunt
+```
+
+This will build the development version of the application and watch for file changes.
+
+```shell
 grunt dev
 ```
 
@@ -89,6 +95,12 @@ grunt dist
 ```
 
 This will build the distribution version of the application that minifies and uglifies all the files.
+
+```shell
+grunt test
+```
+
+This will build the development version of the application, lint all your code and run all the tests.
 
 
 ## Test

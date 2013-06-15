@@ -1,8 +1,58 @@
-/*global module:false */
-/*jshint camelcase:false */
+/* global module:false */
+
 module.exports = function (grunt) {
 
 	grunt.initConfig({
+		/*
+			Finds Handlebars templates and precompiles them into functions.
+			The provides two benefits:
+
+			1. Templates render much faster
+			2. We only need to include the handlebars-runtime microlib
+				and not the entire Handlebars parser.
+
+			Files will be written out to dependencies/compiled/templates.js
+			which is required within the project files so will end up
+			as part of our application.
+
+			The compiled result will be stored in
+			Ember.TEMPLATES keyed on their file path (with the "app/templates" stripped)
+		*/
+		emberTemplates: {
+			options: {
+				templateName: function (sourceFile) {
+					return sourceFile.replace(/app\/templates\//, "");
+				}
+			},
+			"dependencies/compiled/templates.js": ["app/templates/**/*.hbs"]
+		},
+
+		/*
+			Inject javascript into index.html when required (used to add some scripts only in production builds)
+		*/
+		template: {
+			app_dev: {
+				options: {
+					data: {
+						googleanalytics: ""
+					}
+				},
+				files: {
+					"index.html": ["app/app.html.tpl"]
+				}
+			},
+			app_dist: {
+				options: {
+					data: {
+						googleanalytics: "<script>(function(i,s,o,g,r,a,m){i[\"GoogleAnalyticsObject\"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,\"script\",\"//www.google-analytics.com/analytics.js\",\"ga\");ga(\"create\", \"UA-XXXXXXXX-X\");ga(\"send\", \"pageview\");</script>"
+					}
+				},
+				files: {
+					"index.html": ["app/app.html.tpl"]
+				}
+			}
+		},
+
 		/*
 			A simple ordered concatenation strategy.
 			This will start at app/app.js and begin
@@ -35,30 +85,6 @@ module.exports = function (grunt) {
 		},
 
 		/*
-			Finds Handlebars templates and precompiles them into functions.
-			The provides two benefits:
-
-			1. Templates render much faster
-			2. We only need to include the handlebars-runtime microlib
-				and not the entire Handlebars parser.
-
-			Files will be written out to dependencies/compiled/templates.js
-			which is required within the project files so will end up
-			as part of our application.
-
-			The compiled result will be stored in
-			Ember.TEMPLATES keyed on their file path (with the "app/templates" stripped)
-		*/
-		emberTemplates: {
-			options: {
-				templateName: function (sourceFile) {
-					return sourceFile.replace(/app\/templates\//, "");
-				}
-			},
-			"dependencies/compiled/templates.js": ["app/templates/**/*.hbs"]
-		},
-
-		/*
 			Reads the projects .jshintrc file and applies coding
 			standards. Doesn't lint the dependencies or test
 			support files.
@@ -74,62 +100,6 @@ module.exports = function (grunt) {
 			options: {
 				jshintrc: ".jshintrc"
 			}
-		},
-
-		/*
-			Watch files for changes.
-
-			Changes in dependencies/ember.js or application javascript
-			will trigger the neuter task.
-
-			Changes to any templates will trigger the ember_templates
-			task (which writes a new compiled file into dependencies/)
-			and then neuter all the files again.
-		*/
-		watch: {
-			markup: {
-				files: ["app/app.html"],
-				tasks: ["htmlmin:dev"]
-			},
-			scripts: {
-				files: [
-					"dependencies/*.js",
-					"app/*.js",
-					"app/**/*.js",
-					"app/**/**/*.js"
-				],
-				tasks: ["neuter:dev"]
-			},
-			styles: {
-				files: [
-					"dependencies/*.less",
-					"dependencies/**/*.less",
-					"app/**/*.less"
-				],
-				tasks: ["less:dev"]
-			},
-			templates: {
-				files: ["app/**/*.hbs"],
-				tasks: ["emberTemplates"]
-			}
-		},
-
-		/*
-			Runs all .html files found in the test/ directory through PhantomJS.
-			Prints the report in your terminal.
-		*/
-		qunit: {
-			all: ["test/**/*.html"]
-		},
-
-		/*
-			Find all the <whatever>_test.js files in the test folder.
-			These will get loaded via script tags when the task is run.
-			This gets run as part of the larger "test" task registered
-			below.
-		*/
-		build_test_runner_file: {
-			all: ["test/**/*_test.js"]
 		},
 
 		/*
@@ -177,6 +147,46 @@ module.exports = function (grunt) {
 			}
 		},
 
+
+		/*
+			Watch files for changes.
+
+			Changes in dependencies/ember.js or application javascript
+			will trigger the neuter task.
+
+			Changes to any templates will trigger the ember_templates
+			task (which writes a new compiled file into dependencies/)
+			and then neuter all the files again.
+		*/
+		watch: {
+			markup: {
+				files: ["app/app.html"],
+				tasks: ["htmlmin:dev"]
+			},
+			scripts: {
+				files: [
+					"dependencies/*.js",
+					"app/*.js",
+					"app/**/*.js",
+					"app/**/**/*.js"
+				],
+				tasks: ["neuter:dev"]
+			},
+			styles: {
+				files: [
+					"dependencies/*.less",
+					"dependencies/**/*.less",
+					"app/**/*.less"
+				],
+				tasks: ["less:dev"]
+			},
+			templates: {
+				files: ["app/**/*.hbs"],
+				tasks: ["emberTemplates"]
+			}
+		},
+
+
 		/*
 			Minify and obfuscate the MY_APP.js file
 		 */
@@ -201,18 +211,38 @@ module.exports = function (grunt) {
 				src: ["MY_APP.js","MY_APP.css"],
 				dest: "index.html"
 			}
+		},
+
+
+		/*
+			Find all the <whatever>_test.js files in the test folder.
+			These will get loaded via script tags when the task is run.
+			This gets run as part of the larger "test" task registered
+			below.
+		*/
+		buildTestRunnerFile: {
+			all: ["test/**/*_test.js"]
+		},
+
+		/*
+			Runs all .html files found in the test/ directory through PhantomJS.
+			Prints the report in your terminal.
+		*/
+		qunit: {
+			all: ["test/**/*.html"]
 		}
 	});
 
-	grunt.loadNpmTasks("grunt-neuter");
-	grunt.loadNpmTasks("grunt-ember-templates");
-	grunt.loadNpmTasks("grunt-contrib-jshint");
-	grunt.loadNpmTasks("grunt-contrib-watch");
-	grunt.loadNpmTasks("grunt-contrib-qunit");
-	grunt.loadNpmTasks("grunt-contrib-less");
 	grunt.loadNpmTasks("grunt-contrib-htmlmin");
+	grunt.loadNpmTasks("grunt-contrib-jshint");
+	grunt.loadNpmTasks("grunt-contrib-less");
+	grunt.loadNpmTasks("grunt-contrib-qunit");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
+	grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks("grunt-ember-templates");
 	grunt.loadNpmTasks("grunt-hashres");
+	grunt.loadNpmTasks("grunt-neuter");
+	grunt.loadNpmTasks("grunt-template");
 
 	/*
 		A task to build the test runner html file that get place in
@@ -220,8 +250,8 @@ module.exports = function (grunt) {
 		place a single <script> tag into the body for every file passed to
 		its coniguration above in the grunt.initConfig above.
 	*/
-	grunt.registerMultiTask("build_test_runner_file", "Creates a test runner file.", function () {
-		var tmpl = grunt.file.read("test/support/runner.html.tmpl");
+	grunt.registerMultiTask("buildTestRunnerFile", "Creates a test runner file.", function () {
+		var template = grunt.file.read("test/support/runner.html.tpl");
 		var renderingContext = {
 			data: {
 				files: this.filesSrc.map(function (fileSrc) {
@@ -229,26 +259,26 @@ module.exports = function (grunt) {
 				})
 			}
 		};
-		grunt.file.write("test/runner.html", grunt.template.process(tmpl, renderingContext));
+		grunt.file.write("test/runner.html", grunt.template.process(template, renderingContext));
 	});
 
 	/*
 		Application Default task. Compiles templates, neuters application code, and begins
 		watching for changes.
 	*/
-	grunt.registerTask("default", ["emberTemplates", "neuter:dev", "less:dev", "htmlmin:dev", "watch"]);
+	grunt.registerTask("default", ["emberTemplates", "template:app_dev", "neuter:dev", "less:dev", "htmlmin:dev", "watch"]);
 
 	/*
 		Application Development task. Compiles templates, neuters application code, lint
 		the result, compile LESS into regular CSS, copy HTML.
 	*/
-	grunt.registerTask("dev", ["emberTemplates", "neuter:dev", "jshint", "less:dev", "htmlmin:dev"]);
+	grunt.registerTask("dev", ["emberTemplates", "template:app_dev", "neuter:dev", "jshint", "less:dev", "htmlmin:dev"]);
 
 	/*
 		Application Distribution task. Compiles templates, neuters application code, lint
 		the result, compile LESS into minified CSS, minify HTML, obfuscate code, and add a hash to bust the cache.
 	*/
-	grunt.registerTask("dist", ["emberTemplates", "neuter:dist", "jshint", "less:dist", "htmlmin:dist", "uglify:dist", "hashres:dist"]);
+	grunt.registerTask("dist", ["emberTemplates", "template:app_dist", "neuter:dist", "jshint", "less:dist", "htmlmin:dist", "uglify:dist", "hashres:dist"]);
 
 	/*
 		A task to run the application's unit tests via the command line.
@@ -259,5 +289,5 @@ module.exports = function (grunt) {
 			- build an html file with a script tag for each test file
 			- headlessy load this page and print the test runner results
 	*/
-	grunt.registerTask("test", ["emberTemplates", "neuter:dev", "jshint", "less:dev", "htmlmin:dev", "build_test_runner_file", "qunit"]);
+	grunt.registerTask("test", ["emberTemplates", "template:app_dev", "neuter:dev", "jshint", "less:dev", "htmlmin:dev", "buildTestRunnerFile", "qunit"]);
 };

@@ -17,5 +17,7 @@
 	<div id="MY_APP"></div>
 
 	<script src="/MY_APP.js" type="text/javascript"></script>
+
+	<%= googleanalytics %>
 </body>
 </html>

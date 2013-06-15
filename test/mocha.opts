@@ -1,0 +1,7 @@
+ --ui bdd
+ --reporter spec
+ --globals MY_APP,window,document,$,store,Handlebars
+ --require should
+ --timeout 10000
+ --slow 10
+ --ignore-leaks
