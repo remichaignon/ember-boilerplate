@@ -1,7 +1,11 @@
 .DS_Store
+
 node_modules/
+npm-debug.log
+
 dependencies/compiled/*.*
 test/runner.html
+
 index.html
 MY_APP.css
 MY_APP.js
