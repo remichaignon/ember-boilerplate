@@ -7,7 +7,7 @@ require("dependencies/compiled/templates");
 
 
 window.MY_APP = Ember.Application.create({
-	rootElement: window.TESTING ? "#qunit-fixture" : "#MY_APP",
+	rootElement: window.TESTING ? "#MY_APP-testing" : "#MY_APP",
 
 	ready: function () {
 		Ember.ObjectController.reopen({ needs: ["application"] });
@@ -21,6 +21,12 @@ window.MY_APP = Ember.Application.create({
 
 if (window.TESTING) {
 	MY_APP.deferReadiness();
+	MY_APP.setupForTesting();
+	MY_APP.injectTestHelpers();
+
+	//function exists (selector) {
+	//	return !!find(selector).length;
+	//}
 }
 
 

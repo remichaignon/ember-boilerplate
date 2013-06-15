@@ -1,7 +1,7 @@
 ember-boilerplate
 =================
 
-Starting point for any ember-based project.
+Starting point for any ember-based project. Simply replace all the `MY_APP` by the name of your app.
 
 Inspired by [Trek's Todos example](https://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences).
 
@@ -77,12 +77,6 @@ Which will build development version of the application and start watching
 for any changes. See `Gruntfile.js` for a deeper dive into what happens here.
 
 ##### Other targets
-
-```shell
-grunt
-```
-
-This will build the development version of the application and watch for file changes.
 
 ```shell
 grunt dev
