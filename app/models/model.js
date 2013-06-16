@@ -35,10 +35,12 @@ MY_APP.Model.reopenClass({
 	},
 
 	ajaxSite: function (type, url, args) {
+		var prefix = window.TESTING ? "../" : "";
+
 		return new Ember.RSVP.Promise(
 			function(resolve, reject) {
 				args.type = type;
-				args.url = url;
+				args.url = prefix + url;
 				args.dataType = "json";
 				args.contentType = "application/json; charset=utf-8";
 

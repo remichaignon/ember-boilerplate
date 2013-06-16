@@ -9,7 +9,7 @@ MY_APP.Config.reopenClass({
 
 		return this.ajaxSite(
 			"GET",
-			"/app/data/config/" + config + ".json",
+			"app/data/config/" + config + ".json",
 			{}
 		).then(
 			function (json) {
