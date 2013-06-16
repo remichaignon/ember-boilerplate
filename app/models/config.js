@@ -14,6 +14,9 @@ MY_APP.Config.reopenClass({
 		).then(
 			function (json) {
 				MY_APP.LOG_TRANSITIONS = (null == json.LOG_TRANSITIONS) ? false : json.LOG_TRANSITIONS;
+				MY_APP.LOG_VIEW_LOOKUPS = (null == json.LOG_VIEW_LOOKUPS) ? false : json.LOG_VIEW_LOOKUPS;
+				MY_APP.LOG_ACTIVE_GENERATION = (null == json.LOG_ACTIVE_GENERATION) ? false : json.LOG_ACTIVE_GENERATION;
+
 				MY_APP.LOG_INSTRUMENTS = (null == json.LOG_INSTRUMENTS) ? false : json.LOG_INSTRUMENTS;
 				MY_APP.LOG_ALL_ERRORS = (null == json.LOG_ALL_ERRORS) ? false : json.LOG_ALL_ERRORS;
 
