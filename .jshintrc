@@ -17,6 +17,7 @@
 	"white": false,
 	"globals": {
 		"$": true,
+		"QUnit": true,
 		"test": true,
 		"equal": true,
 		"ok": true,

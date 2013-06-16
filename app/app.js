@@ -15,18 +15,19 @@ window.MY_APP = Ember.Application.create({
 		Ember.Controller.reopen({ needs: ["application"] });
 
 		$.support.cors = true;
+
+		if (window.TESTING) {
+			QUnit.start();
+		}
 	}
 });
 
 
 if (window.TESTING) {
-	MY_APP.deferReadiness();
 	MY_APP.setupForTesting();
 	MY_APP.injectTestHelpers();
 
-	//function exists (selector) {
-	//	return !!find(selector).length;
-	//}
+	MY_APP.advanceReadiness();
 }
 
 

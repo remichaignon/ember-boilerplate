@@ -1,5 +1,5 @@
 {
-	"API_URL": "",
+	"API_URL": ".",
 	"API_TOKEN": "",
 
 	"LOG_TRANSITIONS": true,

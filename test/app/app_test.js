@@ -1,10 +1,15 @@
 /* global module:false */
 /* global visit:false */
+/* global find:false */
+
+QUnit.config.autostart = false;
+
+function exists (selector) {
+	return !!find(selector).length;
+}
+
 
 module("Ember.js Library", {
-	setup: function () {
-		Ember.run(MY_APP, MY_APP.advanceReadiness);
-	},
 	teardown: function () {
 		MY_APP.reset();
 	}
@@ -14,11 +19,7 @@ test("Check HTML is returned", function() {
 
 	visit("/").then(
 		function () {
-			console.log("visited");
-			ok(true, "Visited");
-		},
-		function () {
-			console.log("fail");
+			ok(exists("*"), "Found HTML!");
 		}
 	);
 
