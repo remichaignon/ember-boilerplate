@@ -26,6 +26,7 @@
 		"console": true,
 		"store": true,
 		"moment": true,
+		"ga": true,
 		"DS": true,
 		"Ember": true,
 		"Handlebars": true,

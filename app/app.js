@@ -34,6 +34,10 @@ if (window.TESTING) {
 require("app/instruments/render_performance");
 
 
+require("app/mixins/google_analytics");
+require("app/mixins/button_state");
+
+
 require("app/models/model");
 require("app/models/config");
 require("app/models/language");
