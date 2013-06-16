@@ -17,7 +17,7 @@
 		TESTING = true;
 	</script>
 	<script type="text/javascript" src="support/qunit.js"></script>
-	<script src="../MY_APP.js"></script>
+	<script type="text/javascript" src="../MY_APP.js"></script>
 </head>
 <body>
 	<div id="qunit"><div id="qunit-fixture"></div></div>
