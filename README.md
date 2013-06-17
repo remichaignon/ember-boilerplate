@@ -1,6 +1,8 @@
 ember-boilerplate
 =================
 
+[![Build Status](https://travis-ci.org/remichaignon/ember-boilerplate.png)](https://travis-ci.org/remichaignon/ember-boilerplate)
+
 Starting point for any ember-based project. Simply replace all the `MY_APP` by the name of your app.
 
 Inspired by [Trek's Todos example](https://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences).
