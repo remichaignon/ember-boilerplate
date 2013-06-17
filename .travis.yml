@@ -1,2 +1,7 @@
-before_install: "npm install -g grunt-cli"
-script: "grunt test"
+language: node_js
+node_js:
+  - "0.8"
+before_script:
+  - "npm install -g grunt-cli"
+script:
+  - "grunt test"
