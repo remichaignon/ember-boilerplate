@@ -1,7 +1,7 @@
 Ember.testing = true;
 
-SE.setupForTesting();
-SE.injectTestHelpers();
+MY_APP.setupForTesting();
+MY_APP.injectTestHelpers();
 
 function exists (selector) {
     return !!find(selector).length;

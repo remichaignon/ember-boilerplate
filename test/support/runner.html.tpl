@@ -13,9 +13,6 @@
 		#MY_APP-testing { zoom: 50%; }
 	</style>
 
-	<script type="text/javascript">
-		TESTING = true;
-	</script>
 	<script type="text/javascript" src="/test/support/qunit.js"></script>
 	<script type="text/javascript" src="/MY_APP.js"></script>
 	<script type="text/javascript" src="/test/support/integration_test_helper.js"></script>
