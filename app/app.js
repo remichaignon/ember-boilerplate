@@ -1,4 +1,5 @@
 require("dependencies/scripts/jquery-1.9.1");
+require("dependencies/scripts/jquery.cookie");
 require("dependencies/scripts/handlebars.runtime");
 require("dependencies/scripts/ember");
 require("dependencies/scripts/moment");
@@ -7,14 +8,14 @@ require("dependencies/compiled/templates");
 
 
 window.MY_APP = Ember.Application.create({
-	rootElement: window.TESTING ? "#MY_APP-testing" : "#MY_APP",
+	rootElement: "#MY_APP",
 
 	ready: function () {
 		MY_APP.LOG_TRANSITIONS = MY_APP.CONFIG.LOG_TRANSITIONS;
 		MY_APP.LOG_VIEW_LOOKUPS = MY_APP.CONFIG.LOG_VIEW_LOOKUPS;
 		MY_APP.LOG_ACTIVE_GENERATION = MY_APP.CONFIG.LOG_ACTIVE_GENERATION;
 
-		$.support.cors = true;
+		Ember.$.support.cors = true;
 	}
 });
 

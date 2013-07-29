@@ -233,7 +233,7 @@ module.exports = function (grunt) {
 		},
 
 		/*
-			Runs all .html files found in the test/ directory through PhantomJS.
+			Runs test.html file through PhantomJS.
 			Prints the report in your terminal.
 		*/
 		qunit: {
@@ -297,5 +297,5 @@ module.exports = function (grunt) {
 			- build an html file with a script tag for each test file
 			- headlessy load this page and print the test runner results
 	*/
-	grunt.registerTask("test", ["emberTemplates", "template:dev", "neuter:dist", "jshint", "less:dist", "htmlmin:dist", "buildTestRunnerFile", "qunit"]);
+	grunt.registerTask("test", ["emberTemplates", "template:dev", "neuter:dist", "jshint", "less:dev", "htmlmin:dev", "buildTestRunnerFile", "qunit"]);
 };
