@@ -67,5 +67,20 @@ MY_APP.Model.reopenClass({
 				Ember.$.ajax(args);
 			}
 		);
+	},
+
+	asResolvedPromise: function (objectToWrap) {
+		return new Ember.RSVP.Promise(
+			function(resolve) {
+				resolve(objectToWrap);
+			}
+		);
+	},
+	asRejectedPromise: function (objectToWrap) {
+		return new Ember.RSVP.Promise(
+			function(resolve, reject) {
+				reject(objectToWrap);
+			}
+		);
 	}
 });
