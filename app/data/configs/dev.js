@@ -1,4 +1,4 @@
-{
+MY_APP.CONFIG = {
 	"API_URL": "",
 	"API_TOKEN": "",
 
@@ -8,4 +8,4 @@
 
 	"LOG_INSTRUMENTS": true,
 	"LOG_ALL_ERRORS": true
-}
+};

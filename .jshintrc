@@ -18,6 +18,7 @@
 	"globals": {
 		"$": true,
 		"QUnit": true,
+		"module": true,
 		"test": true,
 		"equal": true,
 		"ok": true,
@@ -30,6 +31,14 @@
 		"DS": true,
 		"Ember": true,
 		"Handlebars": true,
-		"MY_APP": true
+		"MY_APP": true,
+		"exists": true,
+		"missing": true,
+		"visit": true,
+		"find": true,
+		"fillIn": true,
+		"click": true,
+		"keyDown": true,
+		"wait": true
 	}
 }

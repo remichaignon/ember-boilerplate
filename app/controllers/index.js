@@ -1,1 +1,1 @@
-MY_APP.IndexController = Ember.ObjectController.extend({});
+MY_APP.IndexController = MY_APP.Controller.extend({});

@@ -4,6 +4,26 @@ module.exports = function (grunt) {
 
 	grunt.initConfig({
 		/*
+			Copy and minify the main html file.
+		 */
+		htmlmin: {
+			dev: {
+				files: {
+					"index.html": "index.html"
+				}
+			},
+			dist: {
+				options: {
+					removeComments: true,
+					collapseWhitespace: true
+				},
+				files: {
+					"index.html": "index.html"
+				}
+			}
+		},
+
+		/*
 			Finds Handlebars templates and precompiles them into functions.
 			The provides two benefits:
 
@@ -73,14 +93,14 @@ module.exports = function (grunt) {
 				options: {
 					includeSourceURL: true
 				},
-				files: { "MY_APP.js": ["app/app.js"] }
+				files: { "MY_APP.js": ["app/app.js", "app/data/configs/dev.js"] }
 
 			},
 			dist: {
 				options: {
 					includeSourceURL: false
 				},
-				files: { "MY_APP.js": ["app/app.js"] }
+				files: { "MY_APP.js": ["app/app.js", "app/data/configs/prod.js"] }
 			}
 		},
 
@@ -127,26 +147,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-		/*
-			Copy and minify the main html file.
-		 */
-		htmlmin: {
-			dev: {
-				files: {
-					"index.html": "index.html"
-				}
-			},
-			dist: {
-				options: {
-					removeComments: true,
-					collapseWhitespace: true
-				},
-				files: {
-					"index.html": "index.html"
-				}
-			}
-		},
-
 
 		/*
 			Watch files for changes.
@@ -161,11 +161,11 @@ module.exports = function (grunt) {
 		watch: {
 			templates: {
 				files: ["app/**/*.hbs"],
-				tasks: ["emberTemplates"]
+				tasks: ["emberTemplates", "neuter:dev"]
 			},
 			markup: {
 				files: ["app/app.html.tpl"],
-				tasks: ["htmlmin:dev"]
+				tasks: ["template:dev", "htmlmin:dev"]
 			},
 			scripts: {
 				files: [
@@ -237,7 +237,7 @@ module.exports = function (grunt) {
 			Prints the report in your terminal.
 		*/
 		qunit: {
-			all: ["test/**/*.html"]
+			all: ["test.html"]
 		}
 	});
 
@@ -263,11 +263,11 @@ module.exports = function (grunt) {
 		var renderingContext = {
 			data: {
 				files: this.filesSrc.map(function (fileSrc) {
-					return fileSrc.replace("test/", "");
+					return fileSrc;
 				})
 			}
 		};
-		grunt.file.write("test/runner.html", grunt.template.process(template, renderingContext));
+		grunt.file.write("test.html", grunt.template.process(template, renderingContext));
 	});
 
 	/*
