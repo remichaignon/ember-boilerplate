@@ -4,7 +4,7 @@ node_modules/
 npm-debug.log
 
 dependencies/compiled/*.*
-test/runner.html
+test.html
 
 index.html
 MY_APP.css
