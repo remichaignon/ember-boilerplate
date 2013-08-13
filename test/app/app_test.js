@@ -5,5 +5,6 @@ module("Application", {
 });
 
 test("Parameters", function () {
+	ok(MY_APP.rootElement === "#MY_APP", "rootElement");
 	ok(Ember.$.support.cors, "Cross-origin resource sharing support");
 });

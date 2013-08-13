@@ -5,7 +5,5 @@ MY_APP.IndexRoute = MY_APP.Route.extend({
 	},
 
 	// Hooks
-	beforeModel: function () {
-		this.setup();
-	}
+	beforeModel: function () {}
 });

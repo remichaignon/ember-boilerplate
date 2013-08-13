@@ -1,6 +1,8 @@
 MY_APP.ButtonState = Ember.Mixin.create({
+	// Properties
 	busy: null,
 
+	// Methods
 	setButtonBusy: function() {
 		this.set("busy", true);
 	},

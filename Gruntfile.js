@@ -12,7 +12,7 @@ module.exports = function (grunt) {
 					"index.html": "index.html"
 				}
 			},
-			dist: {
+			prod: {
 				options: {
 					removeComments: true,
 					collapseWhitespace: true
@@ -61,7 +61,7 @@ module.exports = function (grunt) {
 					"index.html": ["app/app.html.tpl"]
 				}
 			},
-			dist: {
+			prod: {
 				options: {
 					data: {
 						googleanalytics: "<script>(function(i,s,o,g,r,a,m){i[\"GoogleAnalyticsObject\"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,\"script\",\"//www.google-analytics.com/analytics.js\",\"ga\");ga(\"create\", \"UA-XXXXXXXX-X\");ga(\"send\", \"pageview\");</script>"
@@ -96,7 +96,7 @@ module.exports = function (grunt) {
 				files: { "MY_APP.js": ["app/app.js", "app/data/configs/dev.js"] }
 
 			},
-			dist: {
+			prod: {
 				options: {
 					includeSourceURL: false
 				},
@@ -135,7 +135,7 @@ module.exports = function (grunt) {
 					"MY_APP.css": "app/styles/master.less"
 				}
 			},
-			dist: {
+			prod: {
 				options: {
 					paths: ["app/styles"],
 					strictImports: true,
@@ -199,7 +199,7 @@ module.exports = function (grunt) {
 			Minify and obfuscate the MY_APP.js file
 		 */
 		uglify: {
-			dist: {
+			prod: {
 				files: {
 					"MY_APP.js": ["MY_APP.js"]
 				}
@@ -215,7 +215,7 @@ module.exports = function (grunt) {
 				fileNameFormat: "${name}.${ext}?v=${hash}",
 				renameFiles: false
 			},
-			dist: {
+			prod: {
 				src: ["MY_APP.js","MY_APP.css"],
 				dest: "index.html"
 			}
@@ -283,10 +283,10 @@ module.exports = function (grunt) {
 	grunt.registerTask("dev", ["emberTemplates", "template:dev", "neuter:dev", "jshint", "less:dev", "htmlmin:dev"]);
 
 	/*
-		Application Distribution task. Compiles templates, neuters application code, lint
+		Application Production task. Compiles templates, neuters application code, lint
 		the result, compile LESS into minified CSS, minify HTML, obfuscate code, and add a hash to bust the cache.
 	*/
-	grunt.registerTask("dist", ["emberTemplates", "template:dist", "neuter:dist", "jshint", "less:dist", "htmlmin:dist", "uglify:dist", "hashres:dist"]);
+	grunt.registerTask("prod", ["emberTemplates", "template:prod", "neuter:prod", "jshint", "less:prod", "htmlmin:prod", "uglify:prod", "hashres:prod"]);
 
 	/*
 		A task to run the application's unit tests via the command line.
@@ -297,5 +297,5 @@ module.exports = function (grunt) {
 			- build an html file with a script tag for each test file
 			- headlessy load this page and print the test runner results
 	*/
-	grunt.registerTask("test", ["emberTemplates", "template:dev", "neuter:dist", "jshint", "less:dev", "htmlmin:dev", "buildTestRunnerFile", "qunit"]);
+	grunt.registerTask("test", ["emberTemplates", "template:dev", "neuter:prod", "jshint", "less:dev", "htmlmin:dev", "buildTestRunnerFile", "qunit"]);
 };

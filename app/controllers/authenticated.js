@@ -8,20 +8,26 @@ MY_APP.AuthenticatedController = Ember.Controller.extend({
 		MY_APP.Model.setToken(this.get("token"));
 	}.observes("token"),
 
+    // Hooks
+    init: function () {
+        if (null != MY_APP.AUTH) {
+            this.set("user", MY_APP.AUTH);
+            this.set("token", MY_APP.Model.getToken());
+            MY_APP.AUTH = null;
+        }
+    },
+
 	// Methods
 	isValid: function () {
 		return ((null != this.get("token")) && (null != this.get("user")));
 	},
 	setCookies: function (token) {
 		if (null == token) {
-			$.removeCookie("token");
+			Ember.$.removeCookie("token");
 			return;
 		}
 
-		$.cookie("token", token);
-	},
-	getCookies: function () {
-		return $.cookie("token");
+		Ember.$.cookie("token", token);
 	},
 	reset: function () {
 		this.setCookies();
@@ -43,30 +49,31 @@ MY_APP.AuthenticatedController = Ember.Controller.extend({
 			user: user,
 			token: token
 		});
-	},
-	tryToAuthenticate: function () {
-		var that = this;
+	}
+});
 
-		if (this.isValid()) {
-			return MY_APP.Model.asResolvedPromise(this.get("user"));
+MY_APP.AuthenticatedController.reopenClass({
+	getCurrent: function () {
+		var token = Ember.$.cookie("token");
+
+		if (null == token) {
+			Ember.$.removeCookie("token");
+
+			return MY_APP.Model.asRejectedPromise({ code: 418, message: "No cookies." });
 		}
 
-		var cookies = this.getCookies();
-
-		if (null == cookies) {
-			this.reset();
-			return MY_APP.Model.asRejectedPromise();
-		}
-
-		this.set("token", cookies);
+		MY_APP.Model.setToken(token);
 
 		// TODO: Get the authenticated from your server using the token
 		//	return MY_APP.User.find().then(
 		//		function (user) {
-		//			that.set("user", user);
-		//			return that.get("user");
-		//		});
-		that.set("user", MY_APP.Model.create({}));
-		return MY_APP.Model.asResolvedPromise(that.get("user"));
+		//			return user;
+		//		},
+		//		function () {
+		//			Ember.$.removeCookie("token");
+		//			MY_APP.Model.setToken(null);
+		//		}
+		//	);
+		return MY_APP.Model.asResolvedPromise(MY_APP.Model.create({}));
 	}
 });

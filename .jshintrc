@@ -16,7 +16,6 @@
 	"browser": true,
 	"white": false,
 	"globals": {
-		"$": true,
 		"QUnit": true,
 		"module": true,
 		"test": true,

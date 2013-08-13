@@ -2,28 +2,18 @@ MY_APP.Route = Ember.Route.extend({
 	// Events
 	events: {
 		// ATTENTION: If you have other events in your route, make sure to copy this error event.
-		//error: function (errorObject, transition) {
-		error: function () {
-			// Handle errors
-		}
+		error: function (errorObject) {
+			MY_APP.Error.handle(errorObject, this.controllerFor("authenticated"));
+		},
 	},
 
 	// Hooks
 	beforeModel: function () {
-		return this.setupRoute();
-	},
+		var auth = this.controllerFor("authenticatedUser");
 
-	// Methods
-	setupRoute: function () {
-		var that = this;
-
-		var applicationController = this.controllerFor("application");
-
-		return applicationController.getLanguage().then(
-			function () {
-				return that.controllerFor("authenticated").tryToAuthenticate();
-			}
-		);
+		if (auth.isValid()) {
+			this.transitionTo("index");
+		}
 	}
 });
 

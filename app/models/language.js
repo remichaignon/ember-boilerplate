@@ -1,24 +1,14 @@
-MY_APP.Language = MY_APP.Model.extend({
-	generic: null,
-
-	all: function () {
-		return $.extend(true, {}, this.get("generic"));
-	}.property("generic")
-});
+MY_APP.Language = MY_APP.Model.extend({});
 
 MY_APP.Language.reopenClass({
-	findAll: function () {
-		var language = MY_APP.Language.create();
-
+	find: function (lang) {
 		return this.ajaxSite(
 			"GET",
-			"/app/languages/en/lang.json",
+			"/app/languages/" + lang + "/lang.json",
 			{}
 		).then(
-			function (json) {
-				language.set("generic", json);
-
-				return language;
+			function (response) {
+				return MY_APP.Language.create(response);
 			}
 		);
 	}

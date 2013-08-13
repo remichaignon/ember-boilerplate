@@ -2,10 +2,15 @@ MY_APP.CONFIG = {
 	"API_URL": "",
 	"API_TOKEN": "",
 
+	"LOG_STACKTRACE_ON_DEPRECATION": true,
+	"LOG_BINDINGS": true,
 	"LOG_TRANSITIONS": true,
+	"LOG_TRANSITIONS_INTERNAL": true,
 	"LOG_VIEW_LOOKUPS": true,
 	"LOG_ACTIVE_GENERATION": true,
 
 	"LOG_INSTRUMENTS": true,
-	"LOG_ALL_ERRORS": true
+	"LOG_ALL_ERRORS": true,
+
+	"LANG": "en"
 };

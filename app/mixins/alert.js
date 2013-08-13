@@ -20,7 +20,6 @@ MY_APP.Alert = Ember.Mixin.create({
 
 	// Methods
 	setAlert: function (type, title, description) {
-
 		this.setProperties({
 			alertType: type,
 			alertTitle: title,
