@@ -32,10 +32,12 @@ MY_APP.Model.reopenClass({
 				};
 
 				args.success = function(xhr) {
+					xhr.then = null;
 					Ember.run(null, resolve, xhr);
 				};
 
 				args.error = function(xhr) {
+					xhr.then = null;
 					Ember.run(null, reject, xhr);
 				};
 
@@ -57,10 +59,12 @@ MY_APP.Model.reopenClass({
 				}
 
 				args.success = function(xhr) {
+					xhr.then = null;
 					Ember.run(null, resolve, xhr);
 				};
 
 				args.error = function(xhr) {
+					xhr.then = null;
 					Ember.run(null, reject, xhr);
 				};
 

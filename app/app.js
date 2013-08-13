@@ -43,8 +43,8 @@ Ember.$(document).ready(
 		);
 
 		MY_APP.AuthenticatedController.getCurrent().then(
-			function (authenticatedUser) {
-				MY_APP.AUTH = authenticatedUser;
+			function (authenticated) {
+				MY_APP.AUTH = authenticated;
 				MY_APP.advanceReadiness();
 			},
 			function () {
