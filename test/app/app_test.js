@@ -1,6 +1,6 @@
 module("Application", {
 	setup: function () {
-		Ember.run(function () {MY_APP.reset();});
+		MY_APP.reset();
 	}
 });
 
