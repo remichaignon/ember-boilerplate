@@ -6,6 +6,11 @@ Starting point for any ember-based project. Simply replace all the `MY_APP` by t
 Inspired by [Trek's Todos example](https://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences).
 
 
+## Status
+
+Not in development or used anymore. Really you should just be using [Ember App Kit](https://github.com/stefanpenner/ember-app-kit).
+
+
 ## Files Hierarchy
 
 ### app/

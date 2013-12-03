@@ -147,7 +147,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-
 		/*
 			Watch files for changes.
 
